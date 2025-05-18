@@ -3,13 +3,14 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/auth.context.jsx';
 
 import Login from './pages/Login.jsx';
+import Signup from './pages/Signup.jsx';
 import Dashboard from './pages/Dashboard.jsx';
-import AgentList from './pages/Agents/AgentList.jsx';
-import AddAgent from './pages/Agents/AddAgent.jsx';
-import EditAgent from './pages/Agents/EditAgent.jsx';
-import UploadList from './pages/Lists/UploadList.jsx';
-import DistributionSummary from './pages/Lists/DistributionSummary.jsx';
-import BatchDetails from './pages/Lists/BatchDetails.jsx';
+import AgentList from './pages/agents/AgentList.jsx';
+import AddAgent from './pages/agents/AddAgent.jsx';
+import EditAgent from './pages/agents/EditAgent.jsx';
+import UploadList from './pages/lists/UploadList.jsx';
+import DistributionSummary from './pages/lists/DistributionSummary.jsx';
+import BatchDetails from './pages/lists/BatchDetails.jsx';
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
@@ -26,6 +27,7 @@ const App = () => {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
+          <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           
           <Route 

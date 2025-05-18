@@ -131,12 +131,14 @@ const initialState = {
 const authReducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN_REQUEST':
+    case 'SIGNUP_REQUEST':
       return {
         ...state,
         isLoading: true,
         error: null
       };
     case 'LOGIN_SUCCESS':
+    case 'SIGNUP_SUCCESS':
       return {
         ...state,
         isLoading: false,
@@ -146,6 +148,7 @@ const authReducer = (state, action) => {
         error: null
       };
     case 'LOGIN_FAILURE':
+    case 'SIGNUP_FAILURE':
       return {
         ...state,
         isLoading: false,

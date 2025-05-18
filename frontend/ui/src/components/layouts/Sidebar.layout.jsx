@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth.js';
 
-// Icons
 import { 
   HomeIcon, 
   UsersIcon, 
   ListIcon, 
   LogOutIcon, 
   ChevronDownIcon,
-  ChevronRightIcon
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -80,7 +80,6 @@ const Sidebar = () => {
 
   return (
     <div className={`bg-slate-800 text-white h-screen transition-all duration-300 ${isOpen ? 'w-64' : 'w-20'} flex flex-col`}>
-      {/* Sidebar Header */}
       <div className="p-4 flex items-center justify-between border-b border-slate-700">
         {isOpen && <h2 className="text-xl font-bold">Admin Panel</h2>}
         <button onClick={toggleSidebar} className="p-1 rounded-full hover:bg-slate-700">
@@ -92,7 +91,6 @@ const Sidebar = () => {
         </button>
       </div>
 
-      {/* Sidebar Navigation */}
       <nav className="flex-1 overflow-y-auto py-4">
         <ul className="space-y-1">
           {sidebarItems.map((item, index) => (
@@ -114,7 +112,6 @@ const Sidebar = () => {
                     )}
                   </button>
                   
-                  {/* Submenu */}
                   {isOpen && isListSubmenuOpen && (
                     <ul className="pl-10 space-y-1 mt-1">
                       {item.submenu.map((subItem, subIndex) => (
@@ -144,7 +141,6 @@ const Sidebar = () => {
         </ul>
       </nav>
 
-      {/* Sidebar Footer */}
       <div className="p-4 border-t border-slate-700">
         <button 
           onClick={handleLogout}

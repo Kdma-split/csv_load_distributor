@@ -9,8 +9,6 @@ const useAuth = () => {
     dispatch({ type: 'LOGIN_REQUEST' });
 
     try {
-      console.log(email)
-      console.log(password)
       const response = await api.post('/api/users/login', { email, password });
       
       if (response.data.success) {
@@ -18,7 +16,6 @@ const useAuth = () => {
         
         localStorage.setItem('token', token);
         
-        // Update auth context
         dispatch({
           type: 'LOGIN_SUCCESS',
           payload: {
@@ -36,6 +33,41 @@ const useAuth = () => {
         
       dispatch({
         type: 'LOGIN_FAILURE',
+        payload: message
+      });
+      
+      return false;
+    }
+  };
+
+  const signup = async (email, password) => {
+    dispatch({ type: 'SIGNUP_REQUEST' });
+
+    try {
+      const response = await api.post('/api/users/register', { email, password });
+      
+      if (response.data.success) {
+        const { token } = response.data;
+        
+        localStorage.setItem('token', token);
+        
+        dispatch({
+          type: 'SIGNUP_SUCCESS',
+          payload: {
+            user: response.data.user,
+            token
+          }
+        });
+        
+        return true;
+      }
+    } catch (error) {
+      const message = 
+        error.response?.data?.message || 
+        'Failed to create account. Please try again.';
+        
+      dispatch({
+        type: 'SIGNUP_FAILURE',
         payload: message
       });
       
@@ -80,6 +112,7 @@ const useAuth = () => {
     isLoading,
     error,
     login,
+    signup,
     logout,
     getMe,
     clearError
